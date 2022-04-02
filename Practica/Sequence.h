@@ -12,13 +12,18 @@ class Sequence {
     virtual bool Insert(const Key& k) = 0;
     virtual bool IsFull() const = 0;
 
+
+    void Print();
+
     int GetBlockSize() {return blockSize_;}
-    void SetBlockSize(int bSize) {blockSize_ = bSize;}
-    std::list<Key> GetTabla() { return table_;}
-    void SetTabla(Sequence<Key> sequence1) {table_ = sequence1;}
+    int GetSizeTable() {return table_.size();}
+    void SetBlockSize(unsigned bSize) {blockSize_ = bSize;}
+    std::list<Key> GetTable() { return table_;}
+    void SetTable(Sequence<Key>* sequence1) {table_ = sequence1;}
+    
   
   protected:
-    int blockSize_;
+    unsigned blockSize_;
     std::list<Key> table_;
     
 
@@ -30,4 +35,12 @@ class Sequence {
   std::vector<Key> table;
   int blockSize;*/
 };
+
+template<class Key>
+void Sequence<Key>::Print() {
+  for (int i = 0; i < table_.size(); i++) {
+    std::cout << i << " ";
+  }
+}
+
 

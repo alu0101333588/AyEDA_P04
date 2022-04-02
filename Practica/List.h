@@ -6,7 +6,7 @@
 template<class Key>
 class List: public Sequence {
     public:
-        List() {}
+        List(unsigned blockSize);
         ~List() = default;
     
         bool Search(const Key& k) const;
@@ -26,7 +26,7 @@ class List: public Sequence {
 };
 
 template<class Key>
-List<Key>::List(int blockSize) {
+List<Key>::List(unsigned blockSize) {
     std::cout << "EN PRUEBAS" << std::endl;
     //SetBlockSize(blockSize);
     //table_.resize(blockSize);

@@ -9,7 +9,7 @@ class feRedispersion: public ExplorationFunction<Key> {
         unsigned operator() (const Key& k, unsigned i) const {
             srand(k);
             int resultado = 0;
-            for (int k = 0; k < i; k++) {
+            for (int j = 0; j < i; j++) {
                 resultado = rand();
             }
             return resultado;

@@ -17,7 +17,7 @@ int main() {
 
     HashTable<Key> *table;
     DispersionFunction<Key> *fd;
-    ExplorationFunction<Key> *fe;
+    ExplorationFunction<Key> *fe = nullptr;
 
     unsigned SizeTable = 0, tDispersion = 0, fDispersion = 0; // Apartado A
     unsigned BlockSize = 0, fExploration = 0; // Apartado B
@@ -65,12 +65,14 @@ int main() {
     while (verifica) {
         switch (tDispersion) {
             case 1:
-				table.table_ = new Block<Key>;
+				table.EstablishTable(1);
+				//table.table_ = new Block<Key>;
                 verifica = false;
 			    break;
 
             case 2:
-				std::cout << "ELECCIÓN NO DISPONIBLE" << std::endl;
+				table.EstablishTable(2);
+				//std::cout << "ELECCIÓN NO DISPONIBLE" << std::endl;
 			    //table.table_ = new List<Key>; 
                 verifica = false;
                 break;
