@@ -37,14 +37,17 @@ class HashTable {
 template<class Key>
 void HashTable<Key>::EstablishTable(int option) {
     if (option == 1) {
-        for (int i = 0; i < table_->size(); i++) {
+        //table_ = new std::vector<Block<Key>>;
+        table_ = new Block<Key>(blockSize_);
+        /*for (int i = 0; i < table_->size(); i++) {
             table_[i] = new Block<Key>(blockSize_);
-        }
+        }*/
         
     } else {
-        for (int i = 0; i < table_->size(); i++) {
+        std::cout << "TEMPORAL" << std::endl;
+        /*for (int i = 0; i < table_->size(); i++) {
             table_[i] = new Block<Key>(blockSize_); // List<Key>
-        }
+        }*/
     }
 }
 
