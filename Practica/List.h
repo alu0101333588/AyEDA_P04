@@ -1,73 +1,51 @@
 #pragma once
 #include <iostream> 
-#include <list> 
+#include <vector> 
 #include "Sequence.h"
 
 template<class Key>
-class List: public Sequence {
+class List: public Sequence<Key> {
     public:
-        List(unsigned blockSize);
+        List();
         ~List() = default;
     
         bool Search(const Key& k) const;
         bool Insert(const Key& k);
         bool IsFull() const;
-    
-    //int get_max_size() const;
-    //void set_max_size(const int& max_size);
-    //std::vector<Key> get_vector();
-    
-    //private:
-    //std::list<> table;
-    //list<std::vector<double>>
-    //std::vector<Key> table;
-    //int tableSize;
-    //int blockSize;
 };
 
 template<class Key>
-List<Key>::List(unsigned blockSize) {
-    std::cout << "EN PRUEBAS" << std::endl;
-    //SetBlockSize(blockSize);
-    //table_.resize(blockSize);
+List<Key>::List() {
+    int size = Sequence<Key>::sblockSize_;
+    Sequence<Key>::sTable_.resize(size);
 }
 
 template<class Key>
 bool List<Key>::Search(const Key& k) const{
-    std::cout << "EN PRUEBAS" << std::endl;
-    //bool match = false;
-    /*std::list<std::vector<double>>::iterator it = table_.begin();
-    int i = -1;
-    while (i < GetBlockSize()) { // !match &&  
-        i++;
-        if (k == it->at(i)) {
-            //coincidencia = true;
+
+    for (int i = 0; i < Sequence<Key>::sTable_.size(); i++) {
+
+        if (k == Sequence<Key>::sTable_[i]) {
+            //std::cout << "[Se encontró en el bloque: " << i;
             return true;
         }
-    }*/
+    }
 
     return false;
-    //return match;
 }
 
 template<class Key>
-bool List<Key>::Insert(const Key& k) const{    
-    
-    std::cout << "EN PRUEBAS" << std::endl;
-    /*if (Search(k) || IsFull()) {
-        return false;
-    }
+bool List<Key>::Insert(const Key& k) {
+    //Search(k) Evitar elementos repetidos
 
-    table_.push_back(k);*/
-    return true;
+    Sequence<Key>::InsertElement(k);
+    return true; // éxito
 }
 
 template<class Key>
 bool List<Key>::IsFull() const{
-    std::cout << "EN PRUEBAS" << std::endl;
-    /*if (table_.size() == GetBlockSize()) {
-        return true;
-    }*/
 
-    return false;
+    return false; // Siempre falso
 }
+
+

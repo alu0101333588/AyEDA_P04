@@ -7,18 +7,14 @@ class fdSuma: public DispersionFunction<Key> {
     public:
         fdSuma(const unsigned n): tableSize_(n) {}
         unsigned operator() (const Key& k) const {
-            /*Key d;
             Key x = k;
             Key y, d;
-            while (valor > 0) {
+            while (x > 0) {
                 y = x % 10;
                 d = d + y;
                 x = x / 10;
             }
-
-            return (d % tableSize_);*/
-
-            return k % tableSize_;
+            return (d % tableSize_);
         }
     private:
         unsigned tableSize_;

@@ -1,47 +1,33 @@
 #pragma once
 #include <iostream> 
-#include <list> 
+#include <vector> 
 #include "Sequence.h"
 
 template<class Key>
-class Block: public Sequence {
+class Block: public Sequence<Key> {
     public:
-        Block(unsigned blockSize);
+        Block();
         ~Block() = default;
     
         bool Search(const Key& k) const;
         bool Insert(const Key& k);
         bool IsFull() const;
-
-    
-    //int get_max_size() const;
-    //void set_max_size(const int& max_size);
-    //std::vector<Key> get_vector();
-    
-    //private:
-    //std::list<> table;
-    //list<std::vector<double>>
-    //std::vector<Key> table;
-    //int tableSize;
-    //int blockSize;
 };
 
 
 template<class Key>
-Block<Key>::Block(unsigned blockSize) {
-    SetBlockSize(blockSize);
-    table_.resize(blockSize);
+Block<Key>::Block() {
+    int size = Sequence<Key>::sblockSize_;
+    Sequence<Key>::sTable_.resize(size);
 }
 
 template<class Key>
 bool Block<Key>::Search(const Key& k) const{
 
-    std::list<std::Sequence<Key>>::iterator it = table_.begin();
-    int i = -1;
-    while (i < GetBlockSize()) {   
-        i++;
-        if (k == it->at(i)) {
-            //coincidencia = true;
+    for (int i = 0; i < Sequence<Key>::sTable_.size(); i++) {
+
+        if (k == Sequence<Key>::sTable_[i]) {
+            //std::cout << "[Se encontró en el bloque: " << i;
             return true;
         }
     }
@@ -50,22 +36,30 @@ bool Block<Key>::Search(const Key& k) const{
 }
 
 template<class Key>
-bool Block<Key>::Insert(const Key& k) const{
-    //Search(k)
+bool Block<Key>::Insert(const Key& k) {
+    //Search(k) Evitar elementos repetidos
     if (IsFull()) {
         return false; // fracaso
     }
 
-    table_.push_back(k);
+    Sequence<Key>::InsertElement(k);
     return true; // éxito
 }
 
 template<class Key>
 bool Block<Key>::IsFull() const{
 
-    if (table_.size() == GetBlockSize()) {
+    int sizeBlock_act = Sequence<Key>::sTable_.size();
+    int sizeBlock_max = Sequence<Key>::sblockSize_;
+
+    if (sizeBlock_act == sizeBlock_max) {
+        if (Sequence<Key>::sTable_[0] == ' '){
+            return false;
+        }
         return true;
     }
 
     return false;
 }
+
+

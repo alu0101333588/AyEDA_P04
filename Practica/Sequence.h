@@ -1,6 +1,6 @@
-#pragma once
+#pragma one
 #include <iostream> 
-#include <list>
+#include <vector>
 
 template<class Key>
 class Sequence {
@@ -15,31 +15,23 @@ class Sequence {
 
     void Print();
 
-    int GetBlockSize() {return blockSize_;}
-    int GetSizeTable() {return table_.size();}
-    void SetBlockSize(unsigned bSize) {blockSize_ = bSize;}
-    std::list<Key> GetTable() { return table_;}
-    void SetTable(Sequence<Key>* sequence1) {table_ = sequence1;}
+    int GetBlockSize() {return sblockSize_;}
+    int GetSizeTable() {return sTable_.size();}
+    void SetBlockSize(int bSize) {sblockSize_ = bSize;}
     
+    Key GetPosicion(int i) {return sTable_[i];}
+    void InsertElement(Key k) {sTable_.push_back(k);}
   
   protected:
-    unsigned blockSize_;
-    std::list<Key> table_;
-    
+    int sblockSize_; // sSize
+    std::vector<Key> sTable_; // sequenceTable
 
-  //int get_max_size() const;
-  //void set_max_size(const int& max_size);
-  //std::vector<Key> get_vector();
-
- /*private:
-  std::vector<Key> table;
-  int blockSize;*/
 };
 
 template<class Key>
 void Sequence<Key>::Print() {
-  for (int i = 0; i < table_.size(); i++) {
-    std::cout << i << " ";
+  for (int i = 0; i < sTable_.size(); i++) {
+    std::cout << sTable_[i] << " ";
   }
 }
 
