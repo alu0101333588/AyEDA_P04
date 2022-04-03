@@ -45,9 +45,9 @@ void HashTable<Key>::EstablishTable(int option) {
         }
        
     } else {
-        for (int i = 0; i < size; i++) {
+        /*for (int i = 0; i < size; i++) {
             table_[i] = new List<Key>[1];
-        }
+        }*/
         //std::cout << "TEMPORAL" << std::endl;
         
     }
@@ -90,8 +90,10 @@ bool HashTable<Key>::Insert(const Key& k) {
         bool exito = false;
         unsigned iteracion = 0;
         while (!exito) {
-            int posicion2 = fe_->operator()(k, iteracion);
-            if (posicion2 >= tableSize_) {
+            int posicion2; //= fe_->operator()(k, iteracion);
+            posicion2 = fd_->operator()(k) + fe_->operator()(k, iteracion) % tableSize_;
+            if (iteracion > tableSize_) {
+                std::cout << "NO SE HA PODIDO INSERTAR EL VALOR" << std::endl;
                 return false;
             }
             verifica = table_[posicion2]->Insert(k);

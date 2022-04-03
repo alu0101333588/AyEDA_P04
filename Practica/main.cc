@@ -1,7 +1,7 @@
 #include <iostream>
 #include "HashTable.h"
-#include "List.h"
-#include "Block.h"
+//#include "List.h"
+//#include "Block.h"
 #include "fdModulo.h"
 #include "fdSuma.h"
 #include "fdPseudoaleatoria.h"
