@@ -88,16 +88,19 @@ bool HashTable<Key>::Insert(const Key& k) {
         bool exito = false;
         unsigned iteracion = 0;
         while (!exito) {
-            int posicion2; //= fe_->operator()(k, iteracion);
-            posicion2 = fd_->operator()(k) + fe_->operator()(k, iteracion) % tableSize_;
+            
             if (iteracion > tableSize_) {
-                std::cout << "NO SE HA PODIDO INSERTAR EL VALOR" << std::endl;
+                std::cout << "***NO SE HA PODIDO INSERTAR EL VALOR***" << std::endl;
                 return false;
             }
-            verifica = table_[posicion2]->Insert(k);
+            //= fe_->operator()(k, iteracion);
+            int posicion2 = fd_->operator()(k) + fe_->operator()(k, iteracion);
+            int posicion3 = posicion2 % tableSize_;
+            //std::cout << "[CONSULA EN POSICIÓN " << posicion3 << "] :: " << posicion2 << std::endl;
+            verifica = table_[posicion3]->Insert(k);
             if (verifica) {
                 exito = true;
-                std::cout << "(Insertado en posición " << posicion2 << "). (it: " << iteracion << ")." << std::endl;
+                std::cout << "(Insertado en posición " << posicion3 << "). (it: " << iteracion << ")." << std::endl;
                 return true;
             }
             iteracion++;

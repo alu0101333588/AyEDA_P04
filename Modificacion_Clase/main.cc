@@ -1,7 +1,7 @@
 #include <iostream>
 #include "HashTable.h"
 //#include "List.h"
-#include "Block.h"
+//#include "Block.h"
 #include "fdModulo.h"
 #include "fdSuma.h"
 #include "fdPseudoaleatoria.h"
@@ -25,7 +25,7 @@ int main() {
     bool verifica = true;
 	Key element;
 
-    std::cout << "[BÚSQUEDA POR DISPERSIÓN]" << std::endl;
+    std::cout << "[Práctica 04 - BÚSQUEDA POR DISPERSIÓN]" << std::endl;
     std::cout << "Tamaño de la tabla: ";
     std::cin >> SizeTable;
 
@@ -181,7 +181,7 @@ int main() {
 			break;
 
 		default:
-			std::cout << "[INCORRECT] Opción no válida. Vuelve a intentarlo..." << std::endl;
+			std::cout << "X [INCORRECT] Opción no válida. Vuelve a intentarlo..." << std::endl;
 			break;
 		}	
 	}
