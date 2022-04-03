@@ -26,7 +26,8 @@ class HashTable {
     
     private:
         unsigned tableSize_; // Tamaño tabla
-        std::vector<Sequence<Key>> *table_;
+        //std::vector<Sequence<Key>> *table_;
+        Sequence<Key> **table_;
 
         DispersionFunction<Key> *fd_;
         unsigned blockSize_; // En dispersión abierta = 0
@@ -36,18 +37,40 @@ class HashTable {
 
 template<class Key>
 void HashTable<Key>::EstablishTable(int option) {
+    int size = tableSize_;
+    table_ = new Sequence<Key>*[size];
+
     if (option == 1) {
-        //table_ = new std::vector<Block<Key>>;
-        table_ = new Block<Key>(blockSize_);
-        /*for (int i = 0; i < table_->size(); i++) {
-            table_[i] = new Block<Key>(blockSize_);
-        }*/
+
+        int blockSize = blockSize_;
+        for (int i = 0; i < size; i++) {
+            table_[i] = new Block<Key>[1];
+            table_[i]->SetBlockSize(blockSize);
+        }
+
+        
+
+        /*std::cout << "INFORME 1" << std::endl;
+        
+        std::cout << "INFORME 2" << std::endl;
+        table2_[0] = new Block<Key>[1];
+        std::cout << "INFORME 3" << std::endl;
+        //bool prueba1 = table2_[0]->Insert(k);
+        bool prueba1 = true;
+        std::cout << "INFORME 4. " << prueba1 << std::endl;
+        table2_[0]->SetBlockSize(4);
+        std::cout << "INFORME 5" << std::endl;
+        Key elemento2 = 42;
+        bool verifica2 = table2_[0]->Insert(elemento2);
+        elemento2 = 50;
+        bool verifica3 = table2_[0]->Insert(elemento2);
+        std::cout << "INFORME 6" << std::endl;
+        std::cout << "INFORMEEEE " << table2_[0]->GetPosicion(0) << std::endl;
+        std::cout << "INFORMEEEE " << table2_[0]->GetPosicion(1) << std::endl;*/
         
     } else {
         std::cout << "TEMPORAL" << std::endl;
-        /*for (int i = 0; i < table_->size(); i++) {
-            table_[i] = new Block<Key>(blockSize_); // List<Key>
-        }*/
+        
     }
 }
 
@@ -65,8 +88,9 @@ HashTable<Key>::HashTable(unsigned tableSize, DispersionFunction<Key> *fd, Explo
 template<class Key>
 bool HashTable<Key>::Search(const Key& k) const {
 
-    for (int i = 0; i < table_->size(); i++) {
-        if (table_[i].Search(k)) {
+    for (int i = 0; i < tableSize_; i++) {
+        bool verificacion = table_[i]->Search(k);
+        if (verificacion) {
             return true;
         }
     }
@@ -78,20 +102,33 @@ template<class Key>
 bool HashTable<Key>::Insert(const Key& k) {
 
     unsigned posicion = fd_->operator()(k);
-    //fd_()(k);
 
-    if (!(table_[posicion].Insert(k))) { // Cerrada
+    bool verifica = table_[posicion]->Insert(k);
+    //std::cout << "[OUT] Posicion solicita " << posicion << std::endl;
+    
+
+    if (!verifica) { // Cerrada
+        //std::cout << "BARRERA --" << std::endl;
         bool exito = false;
-        unsigned iteracion = 1;
+        unsigned iteracion = 0;
         while (!exito) {
             int posicion2 = fe_->operator()(k, iteracion);
-            if (table_[posicion2].Insert(k)) {
+            if (posicion2 >= blockSize_) {
+                return false;
+            }
+            //std::cout << "solicita posición: " << posicion2 << std::endl;
+            verifica = table_[posicion2]->Insert(k);
+            //std::cout << "BARRERA 2" << std::endl;
+            if (verifica) {
+                //std::cout << "Se ha insertado en la posición " << posicion2 << ". it: " << iteracion << std::endl;
                 exito = true;
                 return true;
             }
+            std::cout << "iteraciones " << iteracion << std::endl;
             iteracion++;
         }
     } else { // Abierta
+        //std::cout << "Se ha insertado en la posición " << posicion << ". SIN it" << std::endl;
         return true;
     }
 
@@ -100,9 +137,9 @@ bool HashTable<Key>::Insert(const Key& k) {
 
 template<class Key>
 void HashTable<Key>::Print() {
-    for (int i = 0; i < table_->size(); i++) {
+    for (int i = 0; i < tableSize_; i++) {
         std::cout << i << ": ";
-        table_[i].Print();
+        table_[i]->Print();
         std::cout << std::endl; 
     }
 

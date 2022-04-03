@@ -6,7 +6,7 @@
 template<class Key>
 class Block: public Sequence<Key> {
     public:
-        Block(unsigned blockSize);
+        Block();
         ~Block() = default;
     
         bool Search(const Key& k) const;
@@ -16,16 +16,17 @@ class Block: public Sequence<Key> {
 
 
 template<class Key>
-Block<Key>::Block(unsigned blockSize) {
-    Sequence<Key>::SetBlockSize(blockSize);
-    Sequence<Key>::sTable_.resize(blockSize);
+Block<Key>::Block() {
+    int size = Sequence<Key>::sblockSize_;
+    Sequence<Key>::sTable_.resize(size);
 }
 
 template<class Key>
 bool Block<Key>::Search(const Key& k) const{
 
-    for (int i = 0; i < Sequence<Key>::GetBlockSize(); i++) {
-        if (k == Sequence<Key>::GetPosicion(i)) {
+    for (int i = 0; i < Sequence<Key>::sTable_.size(); i++) {
+
+        if (k == Sequence<Key>::sTable_[i]) {
             return true;
         }
     }
@@ -52,9 +53,19 @@ bool Block<Key>::Insert(const Key& k) {
 template<class Key>
 bool Block<Key>::IsFull() const{
 
-    if (Sequence<Key>::GetSizeTable() == Sequence<Key>::GetBlockSize()) {
+    int sizeBlock_act = Sequence<Key>::sTable_.size();
+    int sizeBlock_max = Sequence<Key>::sblockSize_;
+    //std::cout << "Tamaño tabla " << sizeBlock_act << "Tamaño máximo " << sizeBlock_act << std::endl;
+
+    if (sizeBlock_act == sizeBlock_max) {
+        if (Sequence<Key>::sTable_[0] == ' '){
+            //std::cout << "PUEDE QUE SÍ" << std::endl;
+            return false;
+        }
         return true;
     }
 
     return false;
 }
+
+

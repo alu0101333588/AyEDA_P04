@@ -63,32 +63,17 @@ int main() {
 	std::cout << "Técnica de dispersión (1-> Cerrada. 2-> Abierta):" << std::endl;
     std::cin >> tDispersion;
     while (verifica) {
-        switch (tDispersion) {
-            case 1:
-				table->EstablishTable(1);
-				//table.table_ = new Block<Key>;
-                verifica = false;
-			    break;
-
-            case 2:
-				//table.EstablishTable(2);
-				std::cout << "ELECCIÓN NO DISPONIBLE" << std::endl;
-			    //table.table_ = new List<Key>; 
-                verifica = false;
-                break;
-            default:
-                break;
-
-	    }
-        if (verifica) {
+        if (tDispersion != 1 && tDispersion != 2) {
             std::cout << "ERROR Introduce un tipo correcto: ";
             std::cin >> tDispersion;
-        }
+			verifica = true;
+        } else {
+			verifica = false;
+		}
     }
 	verifica = true;
 
 	
-
 	if (tDispersion == 1) {
 		std::cout << "Has elegido la técnica de dispersión [CERRADA]" << std::endl;
 		std::cout << "Tamaño del bloque: ";
@@ -132,6 +117,26 @@ int main() {
 	}
 
 	table = new HashTable<Key> (SizeTable, fd, fe, BlockSize);
+
+	switch (tDispersion) {
+        case 1:
+			std::cout << "QUE EMPIECE LA MAGIA" << std::endl;
+			table->EstablishTable(1);
+			//table.table_ = new Block<Key>;
+            verifica = false;
+			break;
+
+        case 2:
+			//table.EstablishTable(2);
+			std::cout << "ELECCIÓN NO DISPONIBLE" << std::endl;
+			//table.table_ = new List<Key>; 
+            verifica = false;
+            break;
+        default:
+            break;
+
+	}
+	verifica = true;
 
 	std::cout << "[MENU]" << std::endl;
 	while (verifica) {

@@ -16,16 +16,16 @@ class Sequence {
 
     void Print();
 
-    int GetBlockSize() {return blockSize_;}
+    int GetBlockSize() {return sblockSize_;}
     int GetSizeTable() {return sTable_.size();}
-    void SetBlockSize(unsigned bSize) {blockSize_ = bSize;}
+    void SetBlockSize(int bSize) {sblockSize_ = bSize;}
     
     std::list<Key> GetTable() { return sTable_;}
     Key GetPosicion(int i) {return sTable_[i];}
     void InsertElement(Key k) {sTable_.push_back(k);}
   
   protected:
-    unsigned blockSize_;
+    int sblockSize_; // sSize
     std::vector<Key> sTable_; // sequenceTable
 
 };
@@ -33,7 +33,7 @@ class Sequence {
 template<class Key>
 void Sequence<Key>::Print() {
   for (int i = 0; i < sTable_.size(); i++) {
-    std::cout << i << " ";
+    std::cout << sTable_[i] << " ";
   }
 }
 
