@@ -45,11 +45,9 @@ void HashTable<Key>::EstablishTable(int option) {
         }
        
     } else {
-        /*for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             table_[i] = new List<Key>[1];
-        }*/
-        //std::cout << "TEMPORAL" << std::endl;
-        
+        }        
     }
 }
 

@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream> 
 #include <vector> 
-#include "Sequence.h"
+//#include "Sequence.h"
 
 template<class Key>
 class List: public Sequence<Key> {
@@ -13,6 +13,7 @@ class List: public Sequence<Key> {
         bool Insert(const Key& k);
         bool IsFull() const;
 };
+
 
 template<class Key>
 List<Key>::List() {
@@ -37,6 +38,9 @@ bool List<Key>::Search(const Key& k) const{
 template<class Key>
 bool List<Key>::Insert(const Key& k) {
     //Search(k) Evitar elementos repetidos
+    /*if (IsFull()) {
+        return false; // fracaso
+    }*/
 
     Sequence<Key>::InsertElement(k);
     return true; // éxito
@@ -44,8 +48,7 @@ bool List<Key>::Insert(const Key& k) {
 
 template<class Key>
 bool List<Key>::IsFull() const{
-
-    return false; // Siempre falso
+    return false;
 }
 
 
