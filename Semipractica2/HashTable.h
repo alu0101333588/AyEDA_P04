@@ -113,14 +113,13 @@ bool HashTable<Key>::Insert(const Key& k) {
         unsigned iteracion = 0;
         while (!exito) {
             int posicion2 = fe_->operator()(k, iteracion);
-            if (posicion2 >= blockSize_) {
+            if (posicion2 >= tableSize_) {
                 return false;
             }
-            //std::cout << "solicita posición: " << posicion2 << std::endl;
+            std::cout << "solicita posición: " << posicion2 << std::endl;
             verifica = table_[posicion2]->Insert(k);
-            //std::cout << "BARRERA 2" << std::endl;
             if (verifica) {
-                //std::cout << "Se ha insertado en la posición " << posicion2 << ". it: " << iteracion << std::endl;
+                std::cout << "Se ha insertado en la posición " << posicion2 << ". it: " << iteracion << std::endl;
                 exito = true;
                 return true;
             }
@@ -128,7 +127,7 @@ bool HashTable<Key>::Insert(const Key& k) {
             iteracion++;
         }
     } else { // Abierta
-        //std::cout << "Se ha insertado en la posición " << posicion << ". SIN it" << std::endl;
+        std::cout << "Se ha insertado en la posición " << posicion << ". SIN it" << std::endl;
         return true;
     }
 
