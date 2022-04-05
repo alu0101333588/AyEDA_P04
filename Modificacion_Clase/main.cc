@@ -9,21 +9,30 @@
 #include "feCuadratica.h"
 #include "feDobleDispersion.h"
 #include "feRedispersion.h"
+#include "Persona.h"
 
 
-using Key = long; // Establecemos Key como tipo long
+//using Key = long; // Establecemos Key como tipo long
+
+using Key = long; // Establecemos Key como tipo Persona (clase Persona)
+
 
 int main() {
 
-    HashTable<Key> *table;
+	//HashTable<Persona> *table2; // MOD
+
+	HashTable<Key> *table;
     DispersionFunction<Key> *fd;
     ExplorationFunction<Key> *fe = nullptr;
+	
 
     unsigned SizeTable = 0, tDispersion = 0, fDispersion = 0; // Apartado A
     unsigned BlockSize = 0, fExploration = 0; // Apartado B
     unsigned option = 0; // Menú
     bool verifica = true;
 	Key element;
+	
+	//table2 = new HashTable<Persona>(SizeTable, fd, fe, BlockSize); // MOD
 
     std::cout << "[Práctica 04 - BÚSQUEDA POR DISPERSIÓN]" << std::endl;
     std::cout << "Tamaño de la tabla: ";
@@ -122,10 +131,10 @@ int main() {
 
 	switch (tDispersion) {
         case 1:
-			table->EstablishTable(1);
+			table->EstablishTable(1); // Para indicar si que es cerrada
 			break;
         case 2:
-			table->EstablishTable(2);
+			table->EstablishTable(2); // Para indicar si que es abierta
             break;
         default:
             break;

@@ -17,7 +17,7 @@ class HashTable {
         bool Search(const Key& k) const; 
         bool Insert(const Key& k); 
     
-        void Print(); 
+        void Print(); // Imprime la tabla. Mejorable con sobrecarga de operator<<
         int GetSizeTab() const {return tableSize_; }
  
         void EstablishTable(int option); // Establece el tipo: Block / List
@@ -32,7 +32,7 @@ class HashTable {
 };
 
 template<class Key>
-void HashTable<Key>::EstablishTable(int option) {
+void HashTable<Key>::EstablishTable(int option) { // Establecer técnica de dispersión
     int size = tableSize_;
     table_ = new Sequence<Key>*[size];
 

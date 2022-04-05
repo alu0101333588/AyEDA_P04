@@ -8,7 +8,8 @@ class fdPseudoaleatoria: public DispersionFunction<Key> {
     public:
         fdPseudoaleatoria(const unsigned n): tableSize_(n) {}
         unsigned operator() (const Key& k) const {
-            srand(k);
+            Key z = k;
+            srand(z);
             return rand() % tableSize_;
         }
     private:

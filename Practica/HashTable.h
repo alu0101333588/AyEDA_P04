@@ -89,7 +89,7 @@ bool HashTable<Key>::Insert(const Key& k) {
         unsigned iteracion = 0;
         while (!exito) {
             
-            if (iteracion > tableSize_) {
+            if (iteracion > tableSize_) { // Evitar bucles infinitos
                 std::cout << "***NO SE HA PODIDO INSERTAR EL VALOR***" << std::endl;
                 return false;
             }
